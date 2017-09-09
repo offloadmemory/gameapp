@@ -8,3 +8,5 @@ An app for playing arithmetic games
   3. Make the game playable
   4. Stroing the results and calculating highest Individual score
   5. Share the results socially 
+  6. Adding gamesHomePage where the list of games get displayed
+  7. Adding gameHomePage for each game which describe likes, players and etc..
