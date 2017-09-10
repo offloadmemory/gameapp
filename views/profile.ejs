@@ -1,26 +1,34 @@
 <!-- views/profile.ejs -->
 <!doctype html>
 <html>
-    <% include partials/head %>
+<% include partials/head %>
+
     <body>
+
         <% include partials/navbar %>
-        <div class="container">
-            <div class="page-header text-center">
-                <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-            </div>
-            <div class="row">
-                <!-- LOCAL INFORMATION -->
-                <div class="col-sm-6">
-                    <div class="well">
-                        <h3><span class="fa fa-user"></span> Local</h3>
-                            <p>
-                                <strong>id</strong>: <%= user._id %><br>
-                                <strong>email</strong>: <%= user.local.email %><br>
-                                <strong>password</strong>: <%= user.local.password %>
-                            </p>
-                    </div>
+            <div class="container-fluid">
+                <div class="page-header text-center">
+                    <h1><span class="fa fa-play"></span> Lets Play!!</h1>
+                </div>
+                <div class="row">
+                    <!-- LOCAL INFORMATION -->
+                    <a href='#' class="col-sm-6">
+                        <div class="well text-center">
+                            <h2>
+                                <p>AirthmetiCo</p>
+                            </h2>
+                        </div>
+
+                    </a>
+                    <a href='#' class="col-sm-6">
+                        <div class="well text-center">
+                            <strong><h2><p>Hand Cricket</p></h2></strong>
+                        </div>
+
+                    </a>
                 </div>
             </div>
-        </div>
+
     </body>
+
 </html>
