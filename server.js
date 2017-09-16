@@ -1,23 +1,21 @@
-var express = require('express');
-var app = express();
+var express  = require('express');
+var config   = require("config");
+var app      = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash = require('connect-flash');
-
-var morgan = require('morgan');
-var bodyparser = require ('body-parser');
+var flash    = require('connect-flash');
+var morgan       = require('morgan');
+var bodyparser   = require ('body-parser');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
-
-var configDB = require('./config/database.js');
-var passportConfig = require('./config/passport');
-var routes = require('./app/routes.js');
+var session      = require('express-session');
+var passportConfig = require('./app/passport');
+var routes         = require('./app/routes');
 
 // Use native Node promises
 mongoose.Promise = global.Promise;
 
 // connect to MongoDB
-mongoose.connect(configDB.url, { useMongoClient: true })
+mongoose.connect(config.get("mongoLabUrl"), { useMongoClient: true })
 .then(() => console.log('connection succesful'))
 .catch((err) => console.error(err));
 
@@ -29,7 +27,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
-app.set("port", 3001);
+app.set("port", config.get("port"));
 
 app.use(session({
     secret : 'abcdefghijklmnopqwerty',

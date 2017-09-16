@@ -1,4 +1,10 @@
+var controllers = require("./controllers");
+
 function routes(app, passport) {
+
+    //game routes are allowed to be accessed only after login
+    app.all("/game/*", isLoggedIn);
+
     app.get('/', function (req, res) {
         res.render('index.ejs',{
             signup : true,
@@ -45,13 +51,31 @@ function routes(app, passport) {
 			user   : req.user // get the user out of session and pass to template
 		});
     });    
+
+	app.get('/game/arithmetic',function(req, res) {
+		res.render('arithmetic.ejs', {
+            signup : false,
+            login  : false,
+            user   : req.user
+		});
+    });     
+    
+    app.post('/game/arithmetic',controllers.arithmeticController);
+
+	app.get('/game/handcricket',function(req, res) {
+		res.render('handcricket.ejs', {
+            signup : false,
+            login  : false,
+            user   : req.user
+		});
+    });        
     
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
     });    
     
-    app.get('/auth/google', passport.authenticate('google',{scope :['profile','email'] }));
+    app.get('/auth/google', passport.authenticate('google',{scope : ['profile','email'] }));
 
     app.get('/auth/google/callback', passport.authenticate('google',{
         successRedirect :'/profile',
