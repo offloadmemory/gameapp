@@ -1,52 +1,111 @@
 var controllers = require("../../app/controllers");
-var sinon    = require("sinon");
-var should   = require("should");
+var sinon = require("sinon");
+var should = require("should");
 var arithmeticController = controllers.arithmeticController;
 
-describe("Test Arithmetic Controller", function(){
+describe("Test Arithmetic Controller", function () {
     var mockReq, mockRes;
 
-    beforeEach(function(){
+    beforeEach(function () {
         mockReq = {
-            body : {
-                operand1  : 11,
-                operand2  : 11,
-                operation : 'add',
-                answer    : 23
+            body: {
+                operand1: 11,
+                operand2: 11,
+                operation: 'add',
+                answer: 23
             }
         };
     });
 
-    it.only("add operation returning false", function(done){
+    it("add operation returning false", function (done) {
         mockRes = {
-            send : function(response){
+            send: function (response) {
                 should.equal(response, false);
                 done();
             }
-        };        
+        };
         arithmeticController(mockReq, mockRes);
     });
 
-    it.only("add operation returning true", function(done){
+    it("add operation returning true", function (done) {
         mockReq.body.answer = 22;
         mockRes = {
-            send : function(response){
+            send: function (response) {
                 should.equal(response, true);
                 done();
             }
-        };        
+        };
         arithmeticController(mockReq, mockRes);
-    });    
+    });
 
-    it("subtraction operation", function(done){
-        done();
-    });    
+    it("subtraction operation returning true", function (done) {
+        mockReq.body.operation = 'sub';
+        mockReq.body.answer = 0;
+        mockRes = {
+            send: function (response) {
+                should.equal(response, true);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
 
-    it("multiplication operation", function(done){
-        done();
-    });    
+    it("subtraction operation returning false", function (done) {
+        mockReq.body.operation = 'sub';
+        mockReq.body.answer = 1;
+        mockRes = {
+            send: function (response) {
+                should.equal(response, false);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
 
-    it("division operation", function(done){
-        done();
-    });        
+    it("multiplication operation returning true", function (done) {
+        mockReq.body.operation = 'mul';
+        mockReq.body.answer = 121
+        mockRes = {
+            send: function (response) {
+                should.equal(response, true);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
+
+    it("multiplication operation returning false", function (done) {
+        mockReq.body.operation = 'mul';
+        mockReq.body.answer = 111
+        mockRes = {
+            send: function (response) {
+                should.equal(response, false);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
+
+    it("division operation returnong true", function (done) {
+        mockReq.body.operation = 'div';
+        mockReq.body.answer = 1
+        mockRes = {
+            send: function (response) {
+                should.equal(response, true);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
+    it("division operation returning false", function (done) {
+        mockReq.body.operation = 'div';
+        mockReq.body.answer = 2
+        mockRes = {
+            send: function (response) {
+                should.equal(response, false);
+                done();
+            }
+        };
+        arithmeticController(mockReq, mockRes);
+    });
 });
